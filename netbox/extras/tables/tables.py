@@ -250,6 +250,9 @@ class WebhookTable(NetBoxTable):
         verbose_name=_('Name'),
         linkify=True
     )
+    description = columns.MarkdownColumn(
+        verbose_name=_('Description')
+    )
     content_types = columns.ContentTypesColumn(
         verbose_name=_('Content Types'),
     )
@@ -283,11 +286,11 @@ class WebhookTable(NetBoxTable):
         fields = (
             'pk', 'id', 'name', 'content_types', 'enabled', 'type_create', 'type_update', 'type_delete',
             'type_job_start', 'type_job_end', 'http_method', 'payload_url', 'secret', 'ssl_validation', 'ca_file_path',
-            'tags', 'created', 'last_updated',
+            'tags', 'created', 'last_updated', 'description'
         )
         default_columns = (
             'pk', 'name', 'content_types', 'enabled', 'type_create', 'type_update', 'type_delete', 'type_job_start',
-            'type_job_end', 'http_method', 'payload_url',
+            'type_job_end', 'http_method', 'payload_url', 'description'
         )
 
 

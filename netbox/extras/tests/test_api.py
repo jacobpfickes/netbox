@@ -52,6 +52,7 @@ class WebhookTest(APIViewTestCases.APIViewTestCase):
     ]
     bulk_update_data = {
         'ssl_verification': False,
+        'description': 'New description'
     }
 
     @classmethod

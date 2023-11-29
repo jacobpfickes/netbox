@@ -10,6 +10,10 @@ See the [webhooks documentation](../../integrations/webhooks.md) for more inform
 
 A unique human-friendly name.
 
+### Description
+
+A brief description of the webhook's purpose (optional).
+
 ### Content Types
 
 The type(s) of object in NetBox that will trigger the webhook.

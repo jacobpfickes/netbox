@@ -338,9 +338,9 @@ class WebhookTestCase(ViewTestCases.PrimaryObjectViewTestCase):
 
         site_ct = ContentType.objects.get_for_model(Site)
         webhooks = (
-            Webhook(name='Webhook 1', payload_url='http://example.com/?1', type_create=True, http_method='POST'),
-            Webhook(name='Webhook 2', payload_url='http://example.com/?2', type_create=True, http_method='POST'),
-            Webhook(name='Webhook 3', payload_url='http://example.com/?3', type_create=True, http_method='POST'),
+            Webhook(name='Webhook 1', description='Webhook 1 description', payload_url='http://example.com/?1', type_create=True, http_method='POST'),
+            Webhook(name='Webhook 2', description='Webhook 2 description', payload_url='http://example.com/?2', type_create=True, http_method='POST'),
+            Webhook(name='Webhook 3', description='Webhook 3 description', payload_url='http://example.com/?3', type_create=True, http_method='POST'),
         )
         for webhook in webhooks:
             webhook.save()
@@ -348,6 +348,7 @@ class WebhookTestCase(ViewTestCases.PrimaryObjectViewTestCase):
 
         cls.form_data = {
             'name': 'Webhook X',
+            'description': 'A new webhook',
             'content_types': [site_ct.pk],
             'type_create': False,
             'type_update': True,
@@ -359,20 +360,21 @@ class WebhookTestCase(ViewTestCases.PrimaryObjectViewTestCase):
         }
 
         cls.csv_data = (
-            "name,content_types,type_create,payload_url,http_method,http_content_type",
-            "Webhook 4,dcim.site,True,http://example.com/?4,GET,application/json",
-            "Webhook 5,dcim.site,True,http://example.com/?5,GET,application/json",
-            "Webhook 6,dcim.site,True,http://example.com/?6,GET,application/json",
+            "name,description,content_types,type_create,payload_url,http_method,http_content_type",
+            "Webhook 4,Webhook 4 description,dcim.site,True,http://example.com/?4,GET,application/json",
+            "Webhook 5,Webhook 5 description,dcim.site,True,http://example.com/?5,GET,application/json",
+            "Webhook 6,Webhook 6 description,dcim.site,True,http://example.com/?6,GET,application/json",
         )
 
         cls.csv_update_data = (
-            "id,name",
-            f"{webhooks[0].pk},Webhook 7",
-            f"{webhooks[1].pk},Webhook 8",
-            f"{webhooks[2].pk},Webhook 9",
+            "id,name,description,",
+            f"{webhooks[0].pk},Webhook 7,Webhook 7 description",
+            f"{webhooks[1].pk},Webhook 8,Webhook 8 description",
+            f"{webhooks[2].pk},Webhook 9,Webhook 9 description",
         )
 
         cls.bulk_edit_data = {
+            'description': 'New description',
             'enabled': False,
             'type_create': False,
             'type_update': True,
